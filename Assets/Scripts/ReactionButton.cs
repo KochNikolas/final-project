@@ -11,4 +11,3 @@ public class ReactionButton : MonoBehaviour
         Destroy(gameObject);
     }
 }
-

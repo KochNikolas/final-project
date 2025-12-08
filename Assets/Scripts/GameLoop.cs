@@ -1,7 +1,6 @@
 using UnityEngine;
 using TMPro; 
-using System.Collections;
-using UnityEngine.SceneManagement; // WICHTIG: Das hier wurde hinzugefügt für den Szenenwechsel
+// using UnityEngine.SceneManagement; // Nicht mehr nötig, da dieses Skript nicht mehr wechselt
 
 public class GameLoop : MonoBehaviour
 {
@@ -11,7 +10,7 @@ public class GameLoop : MonoBehaviour
     
     [Header("Einstellungen")]
     public float abstand = 2.0f;        // Wie weit weg schwebt der Text?
-    public int lobbySceneIndex = 0;     // HIER: Die Nummer der Lobby-Szene in den Build Settings
+    // public int lobbySceneIndex = 0;  // Variable entfernt, da wir hier nicht mehr wechseln
 
     private float timer = 0f;
     private bool spielLaeuft = true;
@@ -62,28 +61,22 @@ public class GameLoop : MonoBehaviour
 
     void GameOver()
     {
+        // Timer stoppen
         spielLaeuft = false;
         
         string endZeit = timer.ToString("F2");
-        Debug.Log(endZeit + " s");
+        Debug.Log("Spiel beendet: " + endZeit + " s");
 
         // Finaler Text
         if (timeDisplay != null)
         {
-            timeDisplay.text = endZeit + " s"; // Optional: "Endzeit" hinzugefügt für Klarheit
-            timeDisplay.color = Color.green; // Farbe ändern (optional)
+            timeDisplay.text = endZeit + " s";
+            timeDisplay.color = Color.green; // Farbe ändern auf Grün
             
-            // Startet den Countdown zum Szenenwechsel
-            StartCoroutine(BackToLobbyAfterSeconds(5));
+            // ÄNDERUNG: Hier wurde der automatische Szenenwechsel entfernt.
+            // Der Text bleibt stehen, der Timer steht still, aber die Szene bleibt offen.
         }
     }
 
-    IEnumerator BackToLobbyAfterSeconds(float sekunden)
-    {
-        // Wartet 5 Sekunden, während der Text weiter dem Kopf folgt (weil Update weiterläuft)
-        yield return new WaitForSeconds(sekunden);
-        
-        // HIER passiert der Wechsel:
-        SceneManager.LoadScene(lobbySceneIndex);
-    }
+    // Die Funktion "BackToLobbyAfterSeconds" wurde komplett gelöscht.
 }

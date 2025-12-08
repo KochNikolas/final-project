@@ -11,7 +11,7 @@ public class GameLoop : MonoBehaviour
     
     [Header("Einstellungen")]
     public float abstand = 2.0f;        // Wie weit weg schwebt der Text?
-    public int lobbySceneIndex = 1;     // HIER: Die Nummer der Lobby-Szene in den Build Settings
+    public int lobbySceneIndex = 0;     // HIER: Die Nummer der Lobby-Szene in den Build Settings
 
     private float timer = 0f;
     private bool spielLaeuft = true;

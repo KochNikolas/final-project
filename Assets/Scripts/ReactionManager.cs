@@ -4,6 +4,17 @@ using System.Collections;
 
 public class ReactionManager : MonoBehaviour
 {
+    public GameObject targetPrefab; 
+    public int anzahlZiele = 20;
+
+    [Header("Abstand zum Spieler (Radius)")]
+    public float minAbstand = 3f;  // Wie nah darf ein Ziel sein?
+    public float maxAbstand = 8f;  // Wie weit darf es weg sein?
+
+    [Header("Höhe")]
+    public float hoeheMin = 1.0f;
+    public float hoeheMax = 3.0f;
+
     public Transform player; // Should be the XR camera, not the XR Origin
     [Header("Room Settings")]
     public Renderer roomRenderer;
@@ -56,20 +67,27 @@ public class ReactionManager : MonoBehaviour
 
     void SpawnButton()
     {
-        // Create the button inside the canvas
-        activeButton = Instantiate(buttonPrefab, timeText.transform.parent);
+        for (int i = 0; i < anzahlZiele; i++)
+        {
+            // 1. Zufälliger Winkel im vollen Kreis (0 bis 360 Grad)
+            float winkel = Random.Range(0f, 360f);
 
-        RectTransform rt = activeButton.GetComponent<RectTransform>();
-        rt.position = RandomCanvasPosition();
+            // 2. Zufälliger Abstand zwischen Min und Max
+            float aktuellerAbstand = Random.Range(minAbstand, maxAbstand);
 
-        // Rotate it to face the player
-        rt.LookAt(player);
-        rt.Rotate(0, 180f, 0);
+            // 3. Position berechnen
+            // Wir drehen den Vektor "Vorne" um den zufälligen Winkel und schieben ihn raus
+            Vector3 spawnPosition = Quaternion.Euler(0, winkel, 0) * Vector3.forward * aktuellerAbstand;
 
-        // Assign reaction manager
-        ReactionButton rb = activeButton.GetComponent<ReactionButton>();
-        if (rb != null)
-            rb.reactionManager = this;
+            // 4. Zufällige Höhe hinzufügen
+            spawnPosition.y = Random.Range(hoeheMin, hoeheMax);
+
+            // 5. Ziel erstellen
+            GameObject neuesZiel = Instantiate(targetPrefab, spawnPosition, Quaternion.identity);
+
+            // 6. Zum Spieler drehen (damit die Scheibe dich immer anschaut)
+            neuesZiel.transform.LookAt(Vector3.zero);
+        }
     }
 
     Vector3 RandomCanvasPosition()

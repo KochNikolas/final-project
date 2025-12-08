@@ -18,7 +18,7 @@ public class VisualMemoryManager : MonoBehaviour
     public float startWartezeit = 5f;
     public float leuchtDauer = 1.0f;
     public float pauseZwischenBlinks = 0.5f;
-    public int lobbySceneIndex = 1; // HIER: Index der Lobby-Szene
+    public int lobbySceneIndex = 0; // HIER: Index der Lobby-Szene
 
     [HideInInspector]
     public List<GameObject> generatedSequence = new List<GameObject>();

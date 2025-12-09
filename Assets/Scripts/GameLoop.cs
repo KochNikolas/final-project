@@ -4,6 +4,7 @@ using TMPro;
 
 public class GameLoop : MonoBehaviour
 {
+    private float bestTime = float.MaxValue;
     [Header("Zuweisungen")]
     public TextMeshProUGUI timeDisplay; // Dein Text-Objekt
     public Transform playerHead;        // Deine VR-Kamera
@@ -14,6 +15,13 @@ public class GameLoop : MonoBehaviour
 
     private float timer = 0f;
     private bool spielLaeuft = true;
+
+    void Start()
+    {
+        if (PlayerPrefs.HasKey("AimTrainerHS"))
+            bestTime = PlayerPrefs.GetFloat("AimTrainerHS");
+    }
+
 
     void Update()
     {
@@ -61,22 +69,36 @@ public class GameLoop : MonoBehaviour
 
     void GameOver()
     {
-        // Timer stoppen
         spielLaeuft = false;
-        
-        string endZeit = timer.ToString("F2");
-        Debug.Log("Spiel beendet: " + endZeit + " s");
 
-        // Finaler Text
+        float finalTime = timer;
+        string display = finalTime.ToString("F2") + " s";
+
+        // --- HIGH SCORE CHECK ---
+        if (finalTime < bestTime)
+        {
+            bestTime = finalTime;
+
+            PlayerPrefs.SetFloat("AimTrainerHS", bestTime);
+            PlayerPrefs.Save();
+
+            display += "   (NEW HIGH SCORE!)";
+        }
+        else
+        {
+            display += "\nHIGH SCORE: " + bestTime.ToString("F2") + " s";
+        }
+
+        // Update UI
         if (timeDisplay != null)
         {
-            timeDisplay.text = endZeit + " s";
-            timeDisplay.color = Color.green; // Farbe ändern auf Grün
-            
-            // ÄNDERUNG: Hier wurde der automatische Szenenwechsel entfernt.
-            // Der Text bleibt stehen, der Timer steht still, aber die Szene bleibt offen.
+            timeDisplay.text = display;
+            timeDisplay.color = Color.green;
         }
+
+        Debug.Log(display);
     }
 
-    // Die Funktion "BackToLobbyAfterSeconds" wurde komplett gelöscht.
 }
+
+    // Die Funktion "BackToLobbyAfterSeconds" wurde komplett gelöscht.

@@ -4,6 +4,7 @@ using System.Collections;
 
 public class ReactionManager : MonoBehaviour
 {
+    private float bestTime = float.MaxValue;
     public GameObject targetPrefab; 
     public int anzahlZiele = 20;
 
@@ -125,13 +126,31 @@ public class ReactionManager : MonoBehaviour
 
         timerRunning = false;
         float reactionTime = (Time.time - reactionStartTime) * 1000f;
+
+        string display = reactionTime.ToString("F0") + " ms";
+
+        // --- HIGH SCORE CHECK ---
+        if (reactionTime < bestTime)
+        {
+            bestTime = reactionTime;
+
+            PlayerPrefs.SetFloat("BestReactionTime", bestTime);
+            PlayerPrefs.Save();
+
+            display += "   (NEW HIGH SCORE!)";
+        }
+        else
+        {
+            display += "\nHIGH SCORE: " + bestTime.ToString("F0") + " ms";
+        }
+
         if (timeText != null)
-            timeText.text = reactionTime.ToString("F0") + " ms";
+            timeText.text = display;
 
         if (activeButton != null)
             Destroy(activeButton);
 
-        // Optionally reset room back to red immediately
-        roomRenderer.sharedMaterial.color = Color.black;
+        roomRenderer.sharedMaterial.color = Color.white;
     }
+
 }

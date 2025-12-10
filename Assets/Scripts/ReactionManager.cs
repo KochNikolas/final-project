@@ -4,7 +4,7 @@ using System.Collections;
 
 public class ReactionManager : MonoBehaviour
 {
-    private float bestTime = float.MaxValue;
+    private float bestTime;
     public GameObject targetPrefab; 
     public int anzahlZiele = 20;
 
@@ -33,6 +33,7 @@ public class ReactionManager : MonoBehaviour
 
     void Start()
     {
+        bestTime = PlayerPrefs.GetFloat("BestReactionTime", float.MaxValue);
         StartTrial();
     }
 

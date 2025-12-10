@@ -706,7 +706,7 @@ MonoBehaviour:
   _maxInteractors: -1
   _maxSelectingInteractors: -1
   _data: {fileID: 0}
-  _pointableElement: {fileID: 881231498}
+  _pointableElement: {fileID: 0}
   _rigidbody: {fileID: 881231497}
   _grabSource: {fileID: 0}
   _useClosestPointAsGrabSource: 0
@@ -729,7 +729,7 @@ MonoBehaviour:
   _maxInteractors: -1
   _maxSelectingInteractors: -1
   _data: {fileID: 0}
-  _pointableElement: {fileID: 881231498}
+  _pointableElement: {fileID: 0}
   _rigidbody: {fileID: 881231497}
   _physicsGrabbable: {fileID: 0}
   _resetGrabOnGrabsUpdated: 1
@@ -1832,7 +1832,6 @@ GameObject:
   - component: {fileID: 881231496}
   - component: {fileID: 881231495}
   - component: {fileID: 881231497}
-  - component: {fileID: 881231498}
   - component: {fileID: 881231499}
   m_Layer: 0
   m_Name: Text (TMP)
@@ -2021,28 +2020,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &881231498
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 881231493}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 43f86b14a27b52f4f9298c33015b5c26, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _transferOnSecondSelection: 0
-  _addNewPointsToFront: 0
-  _forwardElement: {fileID: 0}
-  _oneGrabTransformer: {fileID: 0}
-  _twoGrabTransformer: {fileID: 0}
-  _targetTransform: {fileID: 881231494}
-  _maxGrabPoints: -1
-  _rigidbody: {fileID: 881231497}
-  _kinematicWhileSelected: 1
-  _throwWhenUnselected: 1
 --- !u!65 &881231499
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3124,6 +3101,7 @@ GameObject:
   - component: {fileID: 1213788154}
   - component: {fileID: 1213788153}
   - component: {fileID: 1213788152}
+  - component: {fileID: 1213788155}
   m_Layer: 0
   m_Name: BacktoMainLobby
   m_TagString: VisualMemory
@@ -3436,6 +3414,28 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1213788155
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1213788146}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43f86b14a27b52f4f9298c33015b5c26, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _transferOnSecondSelection: 0
+  _addNewPointsToFront: 0
+  _forwardElement: {fileID: 0}
+  _oneGrabTransformer: {fileID: 0}
+  _twoGrabTransformer: {fileID: 0}
+  _targetTransform: {fileID: 881231494}
+  _maxGrabPoints: -1
+  _rigidbody: {fileID: 881231497}
+  _kinematicWhileSelected: 1
+  _throwWhenUnselected: 1
 --- !u!1 &1264064117
 GameObject:
   m_ObjectHideFlags: 0
